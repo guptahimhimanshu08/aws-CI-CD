@@ -5,7 +5,7 @@ const app = express();
 // Root endpoint
 app.get("/", (req, res) => {
   res.json({
-    message: "Elastic Beanstalk deployment successful 🚀"
+    message: "Elastic Beanstalk deployment successful "
   });
 });
 
