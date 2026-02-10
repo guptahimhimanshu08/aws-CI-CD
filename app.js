@@ -1,21 +1,29 @@
 const express = require("express");
+
 const app = express();
 
-// ROOT PATH — THIS IS NOW YOUR HEALTH CHECK
+// Root endpoint (used by EB health checks)
 app.get("/", (req, res) => {
   res.status(200).json({
     status: "OK",
-    message: "Application is healthy"
+    message: "Elastic Beanstalk Node app is running 🚀"
   });
 });
 
-// Optional secondary health endpoint
+// Explicit health endpoint
 app.get("/health", (req, res) => {
   res.status(200).send("OK");
 });
 
-const PORT = process.env.PORT || 8080;
+// IMPORTANT: EB injects PORT
+const PORT = process.env.PORT;
+
+// FAIL FAST if PORT is missing (helps debugging)
+if (!PORT) {
+  console.error("PORT environment variable is not defined");
+  process.exit(1);
+}
 
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server listening on port ${PORT}`);
 });
