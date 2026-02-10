@@ -6,7 +6,7 @@ const app = express();
 app.get("/", (req, res) => {
   res.status(200).json({
     status: "OK",
-    message: "Elastic Beanstalk Node app is running 🚀"
+    message: "Elastic Beanstalk Node app is running! Hurrah!!! 🚀"
   });
 });
 
